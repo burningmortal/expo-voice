@@ -1,16 +1,24 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Link, Tabs } from 'expo-router';
+import { Pressable } from 'react-native';
 
 export default function HomeTabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}>
       <Tabs.Screen
         name='index'
         options={{
           title: 'Home',
+          headerRight: ({ tintColor }) => (
+            <Link href='/post' asChild>
+              <Pressable accessibilityRole='button' accessibilityLabel='Create new post' hitSlop={8}>
+                <Ionicons name='add-circle-outline' size={24} color={tintColor ?? '#000'} />
+              </Pressable>
+            </Link>
+          ),
           tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />,
         }}
       />
