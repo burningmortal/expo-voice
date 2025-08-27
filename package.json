@@ -5,8 +5,9 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run ios --device \"iPhone 14 Plus\"",
+    "ios:devices": "xcrun simctl list",
     "web": "expo start --web",
     "lint": "expo lint",
     "format": "prettier --write **/*.{js,ts,jsx,tsx}"
