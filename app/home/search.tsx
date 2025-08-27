@@ -1,35 +1,10 @@
-import { useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import SearchScreen from '@/features/search/screen/SearchScreen';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
-export default function SearchScreen() {
-  const [query, setQuery] = useState('');
-  const data = ['Expo', 'React Native', 'TypeScript', 'Voice Recorder', 'Routing', 'Tabs', 'Notifications', 'Messages'].filter(item =>
-    item.toLowerCase().includes(query.toLowerCase()),
-  );
-
+export default function SearchIndex() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.searchBar}>
-        <TextInput
-          style={styles.input}
-          value={query}
-          onChangeText={setQuery}
-          placeholder='Search...'
-          returnKeyType='search'
-          clearButtonMode='while-editing'
-        />
-      </View>
-      <FlatList
-        data={data}
-        keyExtractor={item => item}
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.itemText}>{item}</Text>
-          </View>
-        )}
-        ListEmptyComponent={<Text style={styles.empty}>No results</Text>}
-      />
+      <SearchScreen />
     </SafeAreaView>
   );
 }
