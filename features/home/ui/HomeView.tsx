@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function HomeView() {
+export function HomeView() {
   return (
     <>
       <Text style={styles.title}>Home</Text>

@@ -4,14 +4,11 @@ import { Pressable } from 'react-native';
 
 export default function HomeTabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: true,
-      }}>
+    <Tabs screenOptions={{ headerShown: true }}>
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Home',
+          title: 'ホーム',
           headerRight: ({ tintColor }) => (
             <Link href='/post' asChild>
               <Pressable accessibilityRole='button' accessibilityLabel='Create new post' hitSlop={8}>
@@ -25,21 +22,21 @@ export default function HomeTabsLayout() {
       <Tabs.Screen
         name='search'
         options={{
-          title: 'Search',
+          title: '検索',
           tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'search' : 'search-outline'} color={color} size={size} />,
         }}
       />
       <Tabs.Screen
         name='notification'
         options={{
-          title: 'Notifications',
+          title: '通知',
           tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'notifications' : 'notifications-outline'} color={color} size={size} />,
         }}
       />
       <Tabs.Screen
         name='message'
         options={{
-          title: 'Messages',
+          title: 'メッセージ',
           tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'mail' : 'mail-outline'} color={color} size={size} />,
         }}
       />
