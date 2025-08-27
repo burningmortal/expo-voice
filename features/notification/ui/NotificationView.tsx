@@ -1,9 +1,26 @@
+import { Picker } from '@react-native-picker/picker';
 import * as Haptics from 'expo-haptics';
 import { useState } from 'react';
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export function NotificationView() {
+  const HapticTypes = {
+    notification: {
+      [Haptics.NotificationFeedbackType.Success]: Haptics.NotificationFeedbackType.Success,
+      [Haptics.NotificationFeedbackType.Warning]: Haptics.NotificationFeedbackType.Warning,
+      [Haptics.NotificationFeedbackType.Error]: Haptics.NotificationFeedbackType.Error,
+    } as const,
+    impact: {
+      [Haptics.ImpactFeedbackStyle.Heavy]: Haptics.ImpactFeedbackStyle.Heavy,
+      [Haptics.ImpactFeedbackStyle.Light]: Haptics.ImpactFeedbackStyle.Light,
+      [Haptics.ImpactFeedbackStyle.Medium]: Haptics.ImpactFeedbackStyle.Medium,
+      [Haptics.ImpactFeedbackStyle.Rigid]: Haptics.ImpactFeedbackStyle.Rigid,
+      [Haptics.ImpactFeedbackStyle.Soft]: Haptics.ImpactFeedbackStyle.Soft,
+    } as const,
+  } as const;
+
   const [hapticState, setHapticState] = useState<'selection' | 'notification' | 'impact'>('selection');
+  const [pickerState, setPickerState] = useState<string | undefined>(undefined);
 
   const notifications = [
     { id: '1', title: '新しいフォロワー', body: 'ありなさんにフォローされました' },
@@ -19,10 +36,10 @@ export function NotificationView() {
         Haptics.selectionAsync();
         break;
       case 'notification':
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        Haptics.notificationAsync(pickerState as any);
         break;
       case 'impact':
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+        Haptics.impactAsync(pickerState as any);
 
         break;
       default:
@@ -47,6 +64,30 @@ export function NotificationView() {
         <Button title='impact' onPress={() => setHapticState('impact')}>
           impact
         </Button>
+        {hapticState === 'notification' && (
+          <Picker
+            selectedValue={pickerState}
+            onValueChange={(v, i) => {
+              console.log(v, i);
+              setPickerState(v);
+            }}>
+            {Object.values(HapticTypes.notification).map((v, i) => (
+              <Picker.Item key={i} label={v} value={v}></Picker.Item>
+            ))}
+          </Picker>
+        )}
+        {hapticState === 'impact' && (
+          <Picker
+            selectedValue={pickerState}
+            onValueChange={(v, i) => {
+              console.log(v, i);
+              setPickerState(v);
+            }}>
+            {Object.values(HapticTypes.impact).map((v, i) => (
+              <Picker.Item key={i} label={v} value={v}></Picker.Item>
+            ))}
+          </Picker>
+        )}
       </View>
       <FlatList
         data={notifications}
