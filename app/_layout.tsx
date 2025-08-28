@@ -1,10 +1,12 @@
 import { Stack } from 'expo-router';
+import { SafeAreaView } from 'react-native';
 
 export default function RootLayout() {
   return (
     <Stack>
-      {/* Hide parent header for the /home segment to avoid double headers */}
-      <Stack.Screen name="home" options={{ headerShown: false }} />
+      <SafeAreaView>
+        <Stack.Screen name='(home)/index' options={{ headerShown: false, headerTitle: 'ASDF' }} />
+      </SafeAreaView>
     </Stack>
   );
 }
