@@ -9,9 +9,22 @@ export default function HomeTabsLayout() {
         name='index'
         options={{
           title: 'ホーム',
+          // Nudge container for consistent edge spacing
+          headerRightContainerStyle: { paddingRight: 12, alignItems: 'center' },
           headerRight: ({ tintColor }) => (
             <Link href='/post' asChild>
-              <Pressable accessibilityRole='button' accessibilityLabel='Create new post' hitSlop={8}>
+              <Pressable
+                accessibilityRole='button'
+                accessibilityLabel='Create new post'
+                hitSlop={8}
+                style={({ pressed }) => ({
+                  paddingHorizontal: 8,
+                  paddingVertical: 6,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  opacity: pressed ? 0.6 : 1,
+                })}
+              >
                 <Ionicons name='add-circle-outline' size={24} color={tintColor ?? '#000'} />
               </Pressable>
             </Link>
