@@ -1,5 +1,9 @@
 import { Text } from 'react-native';
 
 export default function HomeIndex() {
-  return <Text>テキストa</Text>;
+  return (
+    <>
+      <Text>テキストa</Text>
+    </>
+  );
 }
